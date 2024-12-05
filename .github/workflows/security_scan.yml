@@ -1,10 +1,12 @@
 name: Security Scan Pipeline
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    branches: [ main ]
-  branch:
-    branches: [ main ]
+    branches:
+      - master
 
 jobs:
   scan:
