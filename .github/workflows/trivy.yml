@@ -48,7 +48,7 @@ jobs:
       - name: Upload Trivy scan Golang results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results-golan.sarif'          
+          sarif_file: 'trivy-results-golang.sarif'          
 
       - name: Set up Python
         uses: actions/setup-python@v4
