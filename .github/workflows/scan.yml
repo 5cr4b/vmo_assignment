@@ -2,16 +2,14 @@ name: Security Scan Pipeline 1
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
   branch:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   scan:
     name: Security Scan 1
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
       
     steps:
       - name: Checkout code
