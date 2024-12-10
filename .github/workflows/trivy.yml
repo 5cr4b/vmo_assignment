@@ -30,8 +30,8 @@ jobs:
             tag: '22.04'
           - name: 'alpine'
             tag: 'latest'
-          - name: 'ubuntu'
-            tag: '20.04'               
+          - name: 'golang'
+            tag: '1.12-alpine'             
     
     steps:
       - name: Checkout code
