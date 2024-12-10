@@ -29,7 +29,9 @@ jobs:
           - name: 'ubuntu'
             tag: '22.04'
           - name: 'alpine'
-            tag: 'latest'     
+            tag: 'latest'
+          - name: 'ubuntu'
+            tag: '20.04'               
     
     steps:
       - name: Checkout code
