@@ -83,7 +83,7 @@ jobs:
 
       - name: Generate scan results for ${{ matrix.image.name }}
         run: |
-          python self_analyzer_class.py trivy-results-${{ matrix.image.name }}.sarif
+          python sarif_analyzer.py trivy-results-${{ matrix.image.name }}.sarif
         working-directory: .
 
   notify:

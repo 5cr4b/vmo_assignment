@@ -1,5 +1,5 @@
 import pytest
-from sarif_analyzer_class import SarifAnalyzer
+from sarif_analyzer import SarifAnalyzer
 import json
 from pathlib import Path
 
