@@ -30,8 +30,6 @@ jobs:
             tag: '22.04'
           - name: 'alpine'
             tag: 'latest'
-          - name: 'golang'
-            tag: '1.12-alpine'             
     
     steps:
       - name: Checkout code

@@ -1,0 +1,53 @@
+name: Security Scan Pipeline 1
+
+on:
+  pull_request:
+    branches: [ main ]
+  branch:
+    branches: [ main ]
+
+jobs:
+  scan:
+    name: Security Scan 1
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner for Ubuntu
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ubuntu:22.04'
+          format: 'sarif'
+          output: 'trivy-results-ubuntu.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results-ubuntu.sarif'
+
+      - name: Upload Trivy scan Golang results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results-golan.sarif'          
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
+
+      - name: Run SARIF analysis script
+        run: |
+          echo "Run Sarif analysis script"  
+
+      - name: Run tests
+        run: |
+          echo "Run tests"
