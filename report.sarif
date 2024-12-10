@@ -1,0 +1,1 @@
+{"runs": [{"results": [{"level": "error"}, {"level": "warning"}, {"level": "warning"}, {"level": "note"}], "tool": {"driver": {"rules": [{"id": "rule1"}, {"id": "rule2"}]}}}]}

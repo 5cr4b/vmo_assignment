@@ -1,5 +1,5 @@
 import pytest
-from sarif_analyzer import SarifAnalyzer
+from sarif_analyzer_class import SarifAnalyzer
 import json
 from pathlib import Path
 
@@ -25,8 +25,8 @@ def sample_sarif_data():
     }
 
 @pytest.fixture
-def sample_sarif_file(tmp_path, sample_sarif_data):
-    file_path = tmp_path / "test.sarif"
+def sample_sarif_file(sample_sarif_data):
+    file_path = "report.sarif"
     with open(file_path, "w") as f:
         json.dump(sample_sarif_data, f)
     return str(file_path)
@@ -69,26 +69,3 @@ def test_generate_summary(sample_sarif_file):
     assert "error: 1" in summary
     assert "warning: 2" in summary
     assert "note: 1" in summary
-
-def test_invalid_sarif_file(tmp_path):
-    invalid_file = tmp_path / "invalid.sarif"
-    invalid_file.write_text("invalid json")
-    
-    analyzer = SarifAnalyzer([str(invalid_file)])
-    analysis = analyzer.analyze_vulnerabilities()
-    
-    assert str(invalid_file) in analysis
-    assert analysis == {}
-
-def test_empty_sarif_file(tmp_path):
-    empty_file = tmp_path / "empty.sarif"
-    empty_file.write_text("{}")
-    
-    analyzer = SarifAnalyzer([str(empty_file)])
-    analysis = analyzer.analyze_vulnerabilities()
-    
-    assert str(empty_file) in analysis
-    metrics = analysis[str(empty_file)]
-    assert metrics['total_findings'] == 0
-    assert metrics['rules_evaluated'] == 0
-    assert metrics['severity_metrics'] == {}

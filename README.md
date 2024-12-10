@@ -8,7 +8,7 @@
 # Aprroach 
 - Create CI/CD pipeline on GitHub Action:
     - Use Trivy to scan container image (ubuntu:22.04 and alpine:latest)
-    - Apply scan for PR creation
+    - Apply scan for PR crea    tion
     - Create Python script to handle the result file (.sarif file), read, get and calculate the metadata from .sarif file
     - Write some unit tests to verify the Python script
-    - Integrate Grafana/Kibana to view the result
+    - Integrate ELK to view the result

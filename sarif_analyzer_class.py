@@ -1,15 +1,13 @@
 import json
 import sys
 from collections import defaultdict
-from typing import Dict, List, Any
 
 class SarifAnalyzer:
-    def __init__(self, sarif_files: List[str]):
+    def __init__(self, sarif_files):
         self.sarif_files = sarif_files
         self.results = {}
 
-    def read_sarif_file(self, file_path: str) -> Dict[str, Any]:
-        """Read and parse a SARIF file."""
+    def read_sarif_file(self, file_path):
         try:
             with open(file_path, 'r') as f:
                 return json.load(f)
@@ -17,8 +15,7 @@ class SarifAnalyzer:
             print(f"Error reading SARIF file {file_path}: {e}")
             return {}
 
-    def calculate_severity_metrics(self, data: Dict[str, Any]) -> Dict[str, int]:
-        """Calculate metrics by severity level."""
+    def calculate_severity_metrics(self, data):
         severity_counts = defaultdict(int)
         
         for run in data.get('runs', []):
@@ -28,8 +25,7 @@ class SarifAnalyzer:
                 
         return dict(severity_counts)
 
-    def analyze_vulnerabilities(self) -> Dict[str, Any]:
-        """Analyze vulnerabilities from all SARIF files."""
+    def analyze_vulnerabilities(self):
         all_metrics = {}
         
         for file_path in self.sarif_files:
@@ -47,8 +43,7 @@ class SarifAnalyzer:
             
         return all_metrics
 
-    def generate_summary(self) -> str:
-        """Generate a human-readable summary of the analysis."""
+    def generate_summary(self):
         summary = []
         analysis = self.analyze_vulnerabilities()
         
@@ -64,10 +59,6 @@ class SarifAnalyzer:
         return "\n".join(summary)
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python sarif_analyzer.py <sarif_file1> [sarif_file2 ...]")
-        sys.exit(1)
-        
     analyzer = SarifAnalyzer(sys.argv[1:])
     print(analyzer.generate_summary())
 
