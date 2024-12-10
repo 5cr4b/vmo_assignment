@@ -10,7 +10,7 @@ on:
 
 env:
   PYTHON_VERSION: '3.10'
-  TRIVY_SEVERITY: 'CRITICAL,HIGH'
+  TRIVY_SEVERITY: 'CRITICAL,HIGH,MEDIUM'
   TRIVY_EXIT_CODE: '1'
   TRIVY_SKIP_FILES: ''
   TRIVY_SKIP_DIRS: ''
@@ -58,13 +58,13 @@ jobs:
           sarif_file: 'trivy-results-${{ matrix.image.name }}.sarif'
           category: 'trivy-${{ matrix.image.name }}'
 
-      - name: Upload analysis report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: security-analysis-report
-          path: reports/
-          retention-days: 30
+      # - name: Upload analysis report
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: security-analysis-report
+      #     path: reports/
+      #     retention-days: 30
 
       - name: Set up Python
         uses: actions/setup-python@v4
