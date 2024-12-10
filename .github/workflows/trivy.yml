@@ -26,6 +26,10 @@ jobs:
       fail-fast: false
       matrix:
         image:
+          - name: 'ubuntu'
+            tag: '22.04'
+          - name: 'alpine'
+            tag: 'latest'
           - name: 'golang'
             tag: '1.12-alpine'             
     
@@ -33,7 +37,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner for Ubuntu
+      - name: Run Trivy vulnerability scanner for ${{ matrix.image.name }}
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: '${{ matrix.image.name }}:${{ matrix.image.tag }}'
@@ -45,7 +49,7 @@ jobs:
           skip-dirs: ${{ env.TRIVY_SKIP_DIRS }}
           ignore-unfixed: true
           vuln-type: 'os,library'
-        continue-on-error: true
+        continue-on-error: false
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
