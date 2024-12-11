@@ -27,7 +27,7 @@ jobs:
       matrix:
         image:
           - name: 'ubuntu'
-            tag: '22:04'
+            tag: '22.04'
     
     steps:
       - name: Checkout code
