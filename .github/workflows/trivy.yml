@@ -94,6 +94,7 @@ jobs:
 
     steps:
       - name: Send notification
+        if: always()
         run: |
           echo "Send notification"
         working-directory: .
