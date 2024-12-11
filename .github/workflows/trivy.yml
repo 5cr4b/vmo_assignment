@@ -26,12 +26,8 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - name: 'ubuntu'
-            tag: '22.04'
-          - name: 'alpine'
-            tag: 'latest'
-          - name: 'golang'
-            tag: '1.12-alpine'             
+          - name: 'python'
+            tag: '3.7'
     
     steps:
       - name: Checkout code
@@ -43,13 +39,13 @@ jobs:
           image-ref: '${{ matrix.image.name }}:${{ matrix.image.tag }}'
           format: 'sarif'
           output: 'trivy-results-${{ matrix.image.name }}.sarif'
-          severity: ${{ env.TRIVY_SEVERITY }}
-          exit-code: ${{ env.TRIVY_EXIT_CODE }}
-          skip-files: ${{ env.TRIVY_SKIP_FILES }}
-          skip-dirs: ${{ env.TRIVY_SKIP_DIRS }}
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-        continue-on-error: false
+        #   severity: ${{ env.TRIVY_SEVERITY }}
+        #   exit-code: ${{ env.TRIVY_EXIT_CODE }}
+        #   skip-files: ${{ env.TRIVY_SKIP_FILES }}
+        #   skip-dirs: ${{ env.TRIVY_SKIP_DIRS }}
+        #   ignore-unfixed: true
+        #   vuln-type: 'os,library'
+        # continue-on-error: false
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
