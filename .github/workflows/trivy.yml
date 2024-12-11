@@ -26,8 +26,8 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - name: 'python'
-            tag: '3.7'
+          - name: 'ubuntu'
+            tag: '22:04'
     
     steps:
       - name: Checkout code
