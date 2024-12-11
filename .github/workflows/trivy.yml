@@ -26,8 +26,8 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - name: 'ubuntu'
-            tag: '22.04'
+          - name: 'alpine'
+            tag: 'latest'
     
     steps:
       - name: Checkout code
